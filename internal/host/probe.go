@@ -32,12 +32,12 @@ func ProbeHTTP(host string) error {
 	var myClient *http.Client
 
 	//Way to set the TLS version on the HTTP client
-	defaultTransport := *http.DefaultTransport.(*http.Transport) // dereference it to get a copy of the struct that the pointer points to
+	defaultTransport := http.DefaultTransport.(*http.Transport) // dereference it to get a copy of the struct that the pointer points to
 	defaultTransport.TLSClientConfig = &tls.Config{MaxVersion: tls.VersionTLS11}
 
 	//TODO cycle through TLS versions
 
-	myClient = &http.Client{Transport: &defaultTransport}
+	myClient = &http.Client{Transport: defaultTransport}
 
 	//TODO fix hardcoded protocol prefix.
 	resp, err := myClient.Get("https://" + host)
