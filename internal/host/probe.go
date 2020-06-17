@@ -1,9 +1,11 @@
 package host
 
 import (
+	"crypto/tls"
 	"fmt"
 	"net/http"
 
+	"github.com/pimg/host-analyzer/internal/constants"
 	"github.com/sparrc/go-ping"
 )
 
@@ -26,8 +28,19 @@ func PingHost(host string) error {
 
 //ProbeHTTP probes a host for information regarding the HTTP protocol
 func ProbeHTTP(host string) error {
+
+	var myClient *http.Client
+
+	//Way to set the TLS version on the HTTP client
+	defaultTransport := *http.DefaultTransport.(*http.Transport) // dereference it to get a copy of the struct that the pointer points to
+	defaultTransport.TLSClientConfig = &tls.Config{MaxVersion: tls.VersionTLS11}
+
+	//TODO cycle through TLS versions
+
+	myClient = &http.Client{Transport: &defaultTransport}
+
 	//TODO fix hardcoded protocol prefix.
-	resp, err := http.Get("https://" + host)
+	resp, err := myClient.Get("https://" + host)
 	if err != nil {
 		fmt.Println(err)
 		return err
@@ -37,5 +50,7 @@ func ProbeHTTP(host string) error {
 
 	fmt.Printf("HTTP version: %s\n", resp.Proto)
 	fmt.Printf("HTTP response status: %s\n", resp.Status)
+	fmt.Printf("The Cipher suite is: %s\n", constants.CipherSuites[resp.TLS.CipherSuite])
+	fmt.Printf("The TLS version is: %s\n", constants.TLSVersions[resp.TLS.Version])
 	return nil
 }
