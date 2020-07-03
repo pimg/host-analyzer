@@ -18,6 +18,10 @@ func main() {
 			Name:  "host",
 			Value: "",
 		},
+		cli.IntFlag{
+			Name:  "port",
+			Value: 443,
+		},
 	}
 
 	app.Commands = []cli.Command{
@@ -75,6 +79,14 @@ func main() {
 			Flags: hostAnalyzerFlags,
 			Action: func(c *cli.Context) error {
 				return host.ProbeHTTP(c.String("host"))
+			},
+		},
+		{
+			Name:  "tls",
+			Usage: "Performs a TLS handshake to find information about the TLS configuration",
+			Flags: hostAnalyzerFlags,
+			Action: func(c *cli.Context) error {
+				return host.ProbeTLS(c.String("host"), c.Int("port"))
 			},
 		},
 	}
