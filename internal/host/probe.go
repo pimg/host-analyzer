@@ -8,12 +8,12 @@ import (
 	"strconv"
 
 	"github.com/pimg/host-analyzer/internal/constants"
-	"github.com/sparrc/go-ping"
+	probing "github.com/prometheus-community/pro-bing"
 )
 
-//PingHost performs an ICMP ping on a particular host
+// PingHost performs an ICMP ping on a particular host
 func PingHost(host string) error {
-	pinger, err := ping.NewPinger(host)
+	pinger, err := probing.NewPinger(host)
 	if err != nil {
 		fmt.Println(err)
 		return err
@@ -28,7 +28,7 @@ func PingHost(host string) error {
 	return nil
 }
 
-//ProbeTLS probes a host for information regarding the TLS configuration, like TLS version and supported Cipher suites.
+// ProbeTLS probes a host for information regarding the TLS configuration, like TLS version and supported Cipher suites.
 func ProbeTLS(host string, port int) error {
 
 	for tlsVersion, tlsVersionString := range constants.TLSVersions {
@@ -50,7 +50,7 @@ func ProbeTLS(host string, port int) error {
 	return nil
 }
 
-//ProbeHTTP probes a host for information regarding the HTTP protocol
+// ProbeHTTP probes a host for information regarding the HTTP protocol
 func ProbeHTTP(host string) error {
 
 	//TODO fix hardcoded protocol prefix.
