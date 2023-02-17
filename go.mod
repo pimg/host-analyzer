@@ -1,9 +1,18 @@
 module github.com/pimg/host-analyzer
 
-go 1.14
+go 1.20
 
 require (
-	github.com/sparrc/go-ping v0.0.0-20190613174326-4e5b6552494c
-	github.com/urfave/cli v1.22.4
-	golang.org/x/net v0.0.0-20200602114024-627f9648deb9 // indirect
+	github.com/prometheus-community/pro-bing v0.1.0
+	github.com/urfave/cli/v2 v2.24.4
 )
+
+// require (
+// 	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
+// 	github.com/google/uuid v1.3.0 // indirect
+// 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
+// 	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
+// 	golang.org/x/net v0.0.0-20220615171555-694bf12d69de // indirect
+// 	golang.org/x/sync v0.0.0-20220601150217-0de741cfad7f // indirect
+// 	golang.org/x/sys v0.0.0-20220615213510-4f61da869c0c // indirect
+// )

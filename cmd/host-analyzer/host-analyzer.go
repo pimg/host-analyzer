@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/pimg/host-analyzer/internal/host"
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 func main() {
@@ -14,17 +14,17 @@ func main() {
 	app.Usage = "Let's you query IPs, CNAMEs, MX records and Name servers"
 
 	hostAnalyzerFlags := []cli.Flag{
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "host",
 			Value: "",
 		},
-		cli.IntFlag{
+		&cli.IntFlag{
 			Name:  "port",
 			Value: 443,
 		},
 	}
 
-	app.Commands = []cli.Command{
+	app.Commands = []*cli.Command{
 		{
 			Name:  "ns",
 			Usage: "Looks up the Name Servers for a particular host",
