@@ -3,7 +3,6 @@ package host
 import (
 	"crypto/tls"
 	"fmt"
-	"log"
 	"net/http"
 	"strconv"
 
@@ -32,7 +31,6 @@ func PingHost(host string) error {
 func ProbeTLS(host string, port int) error {
 
 	for tlsVersion, tlsVersionString := range constants.TLSVersions {
-		fmt.Println("Trying with TLS version: ", tlsVersionString)
 
 		conf := &tls.Config{
 			MaxVersion:               tlsVersion,
@@ -40,9 +38,9 @@ func ProbeTLS(host string, port int) error {
 		}
 		conn, err := tls.Dial("tcp", host+":"+strconv.Itoa(port), conf)
 		if err != nil {
-			log.Println(tlsVersionString + "is not supported.")
+			fmt.Println(tlsVersionString + " is unsupported.")
 		} else {
-			fmt.Println(tlsVersionString + "is supported by this site.")
+			fmt.Println(tlsVersionString + " is supported")
 			conn.Close()
 		}
 
