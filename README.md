@@ -3,6 +3,8 @@ Simple CLI tool to retrieve information about a host.
 
 ## Commands
 
+
+```shell
 ./host-analyzer
 NAME:
    hostname analyzer cli - Let's you query IPs, CNAMEs, MX records and Name servers
@@ -23,3 +25,4 @@ COMMANDS:
 
 GLOBAL OPTIONS:
    --help, -h  show help
+```
