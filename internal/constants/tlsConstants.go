@@ -2,7 +2,7 @@ package constants
 
 import "crypto/tls"
 
-//CipherSuites is a constant maps that displays the string based on the uint16 id of the tls.crypto package
+// CipherSuites is a constant maps that displays the string based on the uint16 id of the tls.crypto package
 var CipherSuites = map[uint16]string{
 	tls.TLS_RSA_WITH_RC4_128_SHA:                      `TLS_RSA_WITH_RC4_128_SHA`,
 	tls.TLS_RSA_WITH_3DES_EDE_CBC_SHA:                 `TLS_RSA_WITH_3DES_EDE_CBC_SHA`,
@@ -36,7 +36,7 @@ var CipherSuites = map[uint16]string{
 	tls.TLS_FALLBACK_SCSV: `TLS_FALLBACK_SCSV`,
 }
 
-//TLSVersions is a constant map that displays the TLS version based on the uint16 id of the tls.crypto package
+// TLSVersions is a constant map that displays the TLS version based on the uint16 id of the tls.crypto package
 var TLSVersions = map[uint16]string{
 	tls.VersionTLS10: `VersionTLS10`,
 	tls.VersionTLS11: `VersionTLS11`,
