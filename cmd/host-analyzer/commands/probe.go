@@ -1,14 +1,11 @@
 package commands
 
 import (
-	"fmt"
-
 	"github.com/pimg/host-analyzer/internal/host"
 	"github.com/urfave/cli/v2"
 )
 
 func init() {
-	fmt.Println("Initializing probe commands")
 	GetRegistry().RegisterCommands(ProbeCommands())
 }
 

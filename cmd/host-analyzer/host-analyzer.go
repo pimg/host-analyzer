@@ -9,6 +9,7 @@ import (
 )
 
 func main() {
+	log.SetFlags(0)
 	app := cli.NewApp()
 	app.Name = "hostname analyzer cli"
 	app.Usage = "Let's you query IPs, CNAMEs, MX records and Name servers"
