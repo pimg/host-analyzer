@@ -1,70 +1,70 @@
 package host
 
 import (
-	"fmt"
+	"log"
 	"net"
 )
 
-//FindCNAME finds the CNAMES associated for a host
+// FindCNAME finds the CNAMES associated for a host
 func FindCNAME(host string) error {
 	cname, err := net.LookupCNAME(host)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		return err
 	}
-	fmt.Println(cname)
+	log.Println(cname)
 	return nil
 }
 
-//FindTXTRecords finds the TXT records associated for a host
+// FindTXTRecords finds the TXT records associated for a host
 func FindTXTRecords(host string) error {
 	txtRecords, err := net.LookupTXT(host)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		return err
 	}
 	for _, txtRecord := range txtRecords {
-		fmt.Println(txtRecord)
+		log.Println(txtRecord)
 	}
 	return nil
 }
 
-//FindIPAddresses finds the IP addresses associated for a host
+// FindIPAddresses finds the IP addresses associated for a host
 func FindIPAddresses(host string) error {
 	ip, err := net.LookupIP(host)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		return err
 	}
 
 	for _, ipAddr := range ip {
-		fmt.Println(ipAddr)
+		log.Println(ipAddr)
 	}
 	return nil
 }
 
-//FindNameServers finds the nameservers associated with a host
+// FindNameServers finds the nameservers associated with a host
 func FindNameServers(host string) error {
 	nameServers, err := net.LookupNS(host)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		return err
 	}
 	for _, nameServer := range nameServers {
-		fmt.Println(nameServer.Host)
+		log.Println(nameServer.Host)
 	}
 	return nil
 }
 
-//FindMXRecords finds the MX records associated with a host
+// FindMXRecords finds the MX records associated with a host
 func FindMXRecords(host string) error {
 	mx, err := net.LookupMX(host)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		return err
 	}
 	for _, mxRecord := range mx {
-		fmt.Println(mxRecord.Host, mxRecord.Pref)
+		log.Println(mxRecord.Host, mxRecord.Pref)
 	}
 	return nil
 }

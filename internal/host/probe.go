@@ -2,7 +2,7 @@ package host
 
 import (
 	"crypto/tls"
-	"fmt"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -14,14 +14,14 @@ import (
 func PingHost(host string) error {
 	pinger, err := probing.NewPinger(host)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		return err
 	}
 	pinger.Count = 3
 	pinger.Run()
 	stats := pinger.Statistics()
 	if stats.PacketsRecv > 0 {
-		fmt.Println("ICMP enabled")
+		log.Println("ICMP enabled")
 	}
 
 	return nil
@@ -38,9 +38,9 @@ func ProbeTLS(host string, port int) error {
 		}
 		conn, err := tls.Dial("tcp", host+":"+strconv.Itoa(port), conf)
 		if err != nil {
-			fmt.Println(tlsVersionString + " is unsupported.")
+			log.Println(tlsVersionString + " is unsupported.")
 		} else {
-			fmt.Println(tlsVersionString + " is supported")
+			log.Println(tlsVersionString + " is supported")
 			conn.Close()
 		}
 
@@ -54,15 +54,15 @@ func ProbeHTTP(host string) error {
 	//TODO fix hardcoded protocol prefix.
 	resp, err := http.Get("https://" + host)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		return err
 	}
 
 	defer resp.Body.Close()
 
-	fmt.Printf("HTTP version: %s\n", resp.Proto)
-	fmt.Printf("HTTP response status: %s\n", resp.Status)
-	fmt.Printf("The default Cipher suite is: %s\n", constants.CipherSuites[resp.TLS.CipherSuite])
-	fmt.Printf("The default TLS version is: %s\n", constants.TLSVersions[resp.TLS.Version])
+	log.Printf("HTTP version: %s\n", resp.Proto)
+	log.Printf("HTTP response status: %s\n", resp.Status)
+	log.Printf("The default Cipher suite is: %s\n", constants.CipherSuites[resp.TLS.CipherSuite])
+	log.Printf("The default TLS version is: %s\n", constants.TLSVersions[resp.TLS.Version])
 	return nil
 }
