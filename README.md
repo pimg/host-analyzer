@@ -1,5 +1,6 @@
 # Host analyzer CLI
 [![GoReportCard example](https://goreportcard.com/badge/github.com/pimg/host-analyzer)](https://goreportcard.com/report/github.com/pimg/host-analyzer) ![CI tests](https://github.com/pimg/host-analyzer/actions/workflows/main.yml/badge.svg)
+
 Simple CLI tool to retrieve information about a host.
 
 ## Commands
