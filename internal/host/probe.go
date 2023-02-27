@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/pimg/host-analyzer/internal/constants"
 	probing "github.com/prometheus-community/pro-bing"
@@ -38,6 +39,9 @@ func ProbeTLS(host string, port int) error {
 		}
 		conn, err := tls.Dial("tcp", host+":"+strconv.Itoa(port), conf)
 		if err != nil {
+			if strings.Contains(err.Error(), "no such host") {
+				log.Println(err)
+			}
 			log.Println(tlsVersionString + " is unsupported.")
 		} else {
 			log.Println(tlsVersionString + " is supported")

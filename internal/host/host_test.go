@@ -41,7 +41,6 @@ func TestFindCNAME_unknown(t *testing.T) {
 	output := captureLog(func() {
 		FindCNAME(host)
 	})
-	// assert.Equal(t, "lookup idonotexist.iamunknown on 127.0.0.53:53: no such host\n", output)
 	assert.Contains(t, output, "no such host")
 }
 
