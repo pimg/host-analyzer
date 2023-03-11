@@ -39,10 +39,12 @@ func ProbeTLS(host string, port int) error {
 		}
 		conn, err := tls.Dial("tcp", host+":"+strconv.Itoa(port), conf)
 		if err != nil {
-			if strings.Contains(err.Error(), "no such host") {
+			switch {
+			case strings.Contains(err.Error(), "no such host"):
 				log.Println(err)
+			default:
+				log.Println(tlsVersionString + " is unsupported")
 			}
-			log.Println(tlsVersionString + " is unsupported.")
 		} else {
 			log.Println(tlsVersionString + " is supported")
 			conn.Close()
