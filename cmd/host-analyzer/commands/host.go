@@ -10,6 +10,7 @@ func init() {
 }
 
 func hostCommand() []*cli.Command {
+	//TODO remove port from flags since it is not used
 	hostCommandFlags := GetRegistry().GlobalFlags //when additional flags are needed these can be appended here
 	hostCommands := []*cli.Command{
 		{

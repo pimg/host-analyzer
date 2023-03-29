@@ -9,10 +9,6 @@ var commandRegistry = &Registry{
 			Name:  "host",
 			Value: "",
 		},
-		&cli.IntFlag{
-			Name:  "port",
-			Value: 443,
-		},
 	},
 }
 

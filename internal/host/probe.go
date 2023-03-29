@@ -55,10 +55,9 @@ func ProbeTLS(host string, port int) error {
 }
 
 // ProbeHTTP probes a host for information regarding the HTTP protocol
-func ProbeHTTP(host string) error {
-
-	//TODO fix hardcoded protocol prefix.
-	resp, err := http.Get("https://" + host)
+func ProbeHTTP(scheme string, host string) error {
+	//TODO add port to http.Get whenever it deviates from the default port
+	resp, err := http.Get(scheme + "://" + host)
 	if err != nil {
 		log.Println(err)
 		return err
