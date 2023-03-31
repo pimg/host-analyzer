@@ -11,6 +11,17 @@ func init() {
 
 func ProbeCommands() []*cli.Command {
 	probeFlags := GetRegistry().GlobalFlags //when additional flags are needed these can be appended here
+
+	schemeFlag := &cli.StringFlag{
+		Name:  "scheme",
+		Value: "https",
+	}
+
+	portFlag := &cli.StringFlag{
+		Name:  "port",
+		Value: "443",
+	}
+
 	probeCommands := []*cli.Command{
 		{
 			Name:  "icmp",
@@ -23,15 +34,15 @@ func ProbeCommands() []*cli.Command {
 		{
 			Name:  "http",
 			Usage: "Performs an HTTP call and finds HTTP protocol information",
-			Flags: probeFlags,
+			Flags: append(probeFlags, schemeFlag),
 			Action: func(c *cli.Context) error {
-				return host.ProbeHTTP(c.String("host"))
+				return host.ProbeHTTP(c.String("scheme"), c.String("host"))
 			},
 		},
 		{
 			Name:  "tls",
 			Usage: "Performs a TLS handshake to find information about the TLS configuration",
-			Flags: probeFlags,
+			Flags: append(probeFlags, portFlag),
 			Action: func(c *cli.Context) error {
 				return host.ProbeTLS(c.String("host"), c.Int("port"))
 			},
