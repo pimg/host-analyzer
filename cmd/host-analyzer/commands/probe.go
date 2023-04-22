@@ -36,7 +36,7 @@ func ProbeCommands() []*cli.Command {
 			Usage: "Performs an HTTP call and finds HTTP protocol information",
 			Flags: append(probeFlags, schemeFlag),
 			Action: func(c *cli.Context) error {
-				return host.ProbeHTTP(c.String("scheme"), c.String("host"))
+				return host.ProbeHTTP(c.String("scheme"), c.String("host"), c.String("port"))
 			},
 		},
 		{

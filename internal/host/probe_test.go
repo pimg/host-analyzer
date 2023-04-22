@@ -27,7 +27,7 @@ func TestProbeHttp_known(t *testing.T) {
 	scheme := "https"
 	expected := "HTTP version: HTTP/2.0\nHTTP response status: 200 OK\nThe default Cipher suite is: TLS_AES_256_GCM_SHA384\nThe default TLS version is: VersionTLS13\n"
 	output := captureLog(func() {
-		ProbeHTTP(scheme, host)
+		ProbeHTTP(scheme, host, "")
 	})
 	assert.Contains(t, output, expected)
 }
@@ -36,7 +36,7 @@ func TestProbeHttp_unknown(t *testing.T) {
 	host := "idonotexist.iamunknown"
 	scheme := "https"
 	output := captureLog(func() {
-		ProbeHTTP(scheme, host)
+		ProbeHTTP(scheme, host, "")
 	})
 	assert.Contains(t, output, "no such host")
 }
