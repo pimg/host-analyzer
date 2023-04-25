@@ -56,12 +56,13 @@ func ProbeTLS(host string, port int) error {
 
 // ProbeHTTP probes a host for information regarding the HTTP protocol
 func ProbeHTTP(scheme string, host string, port string) error {
+
 	var urlBuilder strings.Builder
 	urlBuilder.WriteString(scheme + "://")
 	urlBuilder.WriteString(host)
 
 	if port != "" {
-		urlBuilder.WriteString(port)
+		urlBuilder.WriteString(":" + port)
 	}
 
 	resp, err := http.Get(urlBuilder.String())
