@@ -25,7 +25,7 @@ func TestProbeTLS_unknown(t *testing.T) {
 func TestProbeHttp_known(t *testing.T) {
 	host := "apily.dev"
 	scheme := "https"
-	expected := "HTTP version: HTTP/2.0\nHTTP response status: 200 OK\nThe default Cipher suite is: TLS_AES_256_GCM_SHA384\nThe default TLS version is: VersionTLS13\n"
+	expected := "HTTP version: HTTP/2.0\nHTTP response status: 200 OK\nThe default Cipher suite is: TLS_AES_128_GCM_SHA256\nThe default TLS version is: VersionTLS13\n"
 	output := captureLog(func() {
 		ProbeHTTP(scheme, host, "")
 	})
