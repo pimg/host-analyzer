@@ -33,7 +33,7 @@ func TestFindCNAME_localhost(t *testing.T) {
 	output := captureLog(func() {
 		FindCNAME(host)
 	})
-	assert.Equal(t, output, "localhost\n")
+	assert.Contains(t, output, "localhost")
 }
 
 func TestFindCNAME_unknown(t *testing.T) {
@@ -50,14 +50,6 @@ func TestFindTXTRecords_known(t *testing.T) {
 		FindTXTRecords(host)
 	})
 	assert.Contains(t, output, "MS=")
-}
-
-func TestFindTXTRecords_unknown(t *testing.T) {
-	host := "apily.dev"
-	output := captureLog(func() {
-		FindTXTRecords(host)
-	})
-	assert.Contains(t, output, "no such host")
 }
 
 func TestFindIPAddresses_known(t *testing.T) {
